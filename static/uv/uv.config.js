@@ -1,6 +1,6 @@
 /*global Ultraviolet*/
 self.__uv$config = {
-    prefix: '/service/',
+    prefix: '/uv/service/',
     bare: '/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
@@ -8,5 +8,5 @@ self.__uv$config = {
     client: '/uv/uv.client.js',
     bundle: '/uv/uv.bundle.js',
     config: '/uv/uv.config.js',
-    sw: '/uv.sw.js',
+    sw: '/uv/uv.sw.js',
 };
