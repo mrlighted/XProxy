@@ -11,9 +11,23 @@ function setTextAnimation(delay, duration, strokeWidth, timingFunction, strokeCo
         path.style["animation-delay"] = `${i * delay}s`;
     }
 }
+document.documentElement.style.setProperty('--animate-duration', '2s');
+function endAnimation() {
+    document.getElementById("svg-logo").remove();
+    document.getElementById("home").style.display = "block";
+    for (const element of document.getElementById("home").children) {
+        element.classList.add("animate__animated", "animate__fadeInDown");
+    }
+}
 
 window.addEventListener("load", () => {
     setTextAnimation(0.1, 2.6, 1, "linear", "#ffffff");
+    const params = new URL(document.location).searchParams;
+    const showAnim = params.get("loadAnimation");
+    if (showAnim !== null && showAnim.toLowerCase() == "false") {
+        endAnimation();
+        return;
+    }
     let timer = setTimeout(() => {
         let paths = document.querySelectorAll("path");
         let duration = 1000;
@@ -28,8 +42,7 @@ window.addEventListener("load", () => {
                 path.style.opacity = initialOpacity * opacity;
             }
             if (currentStep <= 0) {
-                document.getElementById("svg-logo").remove();
-                document.getElementById("home").style.display = "block";
+                endAnimation();
                 clearInterval(timer);
             }
         }, duration / steps);
